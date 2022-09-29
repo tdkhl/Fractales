@@ -7,4 +7,4 @@ print("Lancement de l'application..")
 if(index is None):
     raise ImportError("Une erreur a eue lieu lors de l'importation de l'UI")
 
-index.__displayWindow__()
+index.displayWindow()
