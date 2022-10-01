@@ -8,3 +8,4 @@ if(index is None):
     raise ImportError("Une erreur a eue lieu lors de l'importation de l'UI")
 
 index.displayWindow()
+
