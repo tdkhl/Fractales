@@ -54,7 +54,7 @@ flocon_label.place(x = 280, y = 200)
 ############
 
 arbreH_img = PhotoImage(file='fract_ressources/fract1.png')
-arbreH = Button(main, image=arbreH_img, fg="grey", bg="grey")
+arbreH = Button(main, image=arbreH_img,command=fractales_draw.draw_arbreenh, fg="grey", bg="grey")
 arbreH.place(x = 425 , y = 60)
 
 arbreH_label = Label(main, text = "Arbre en H", font = ("Verdana", 10, "italic bold "), bg = "grey") 
