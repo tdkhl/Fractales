@@ -67,7 +67,7 @@ arbreH_label.place(x = 440, y = 200)
 
     
 sapin_img = PhotoImage(file='fract_ressources/sapin.png')
-sapin = Button(main, image=sapin_img, fg="grey", bg="grey")
+sapin = Button(main, image=sapin_img,command=fractales_draw.draw_sapin, fg="grey", bg="grey")
 sapin.place(x = 610 , y = 60)
 
 sapin_label = Label(main, text = "Sapin Bordel", font = ("Verdana", 10, "italic bold "), bg = "grey") 

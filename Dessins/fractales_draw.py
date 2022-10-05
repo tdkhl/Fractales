@@ -3,12 +3,14 @@
 ############
 
 from turtle import *
+import math
 
 def draw_pytatree():
     speed(0)
 
     color('#3f1905')
-
+    sc = Screen()
+    sc.title("Arbre de Pythagore")
     hideturtle() # cache la tortue
     up() # lève le stylo
     right(90) # tourne de 90 degrés vers la droite 
@@ -58,6 +60,8 @@ def draw_flocon(n=3, cote=200):
     setheading(0) # orientation intiale de la tête : vers la droite de l'écran
     hideturtle() # on cache la tortue
     speed(0)	 # on accélère la tortue
+    sc = Screen()
+    sc.title("Flocon de Von Koch")
     color('blue')
     for y in range(3):
 	    __courbeVonKoch__(  n, cote  )
@@ -110,7 +114,41 @@ def __arbreenh__(order,center,size):
 
 def draw_arbreenh():
     color('green')
+    sc = Screen()
+    sc.title("Arbre en H")
     __arbreenh__(2, (0, 0), 300)
+    done()
+    mainloop()
+
+def __sapintree__(x,y,direction,length, golden_ratio):
+    up()
+    goto(x,y)
+    seth(direction)
+    pensize(math.log(length,2)/3)
+    if length<10: color('forest green')
+    else: color('gray')
+    down()
+    fd(length)
+    if length < 3: return
+    cx,cy = xcor(), ycor()
+    __sapintree__(cx,cy,direction+72,(2-golden_ratio)*length,golden_ratio)
+    __sapintree__(cx,cy,direction-72,(2-golden_ratio)*length,golden_ratio)
+    __sapintree__(cx,cy,direction,(golden_ratio-1)*length, golden_ratio)
+
+
+
+def draw_sapin():
+    sc = Screen()
+    sc.title('Sapin')
+    #sc.setup(1000,1000)
+    #sc.setworldcoordinates(-1000,-1000,1000,1000)
+    speed(0)
+    hideturtle()
+    tracer(0,0)
+    golden_ratio = (1+5**0.5)/2
+    __sapintree__(0,-900,90,700, golden_ratio)
+    done()
+    mainloop()
 
 
 
