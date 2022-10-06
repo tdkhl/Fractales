@@ -83,6 +83,18 @@ b_surprise.place(x = 50, y = 240)
 
 surprise_label = Label(main, text = "Surpise du Chef", font = ("Verdana", 10, "italic bold "), bg = "grey") 
 surprise_label.place(x = 45, y = 370)
+
+############
+#### Bouton Rect
+############
+
+rect_img = PhotoImage(file='fract_ressources/fract_rect.png')
+b_rect = Button(main, image=rect_img, command=fractales_draw.rect, fg="grey", bg="grey")
+b_rect.place(x = 50, y = 240)
+
+rect_label = Label(main, text = "Rect", font = ("Verdana", 10, "italic bold "), bg = "grey") 
+rect_label.place(x = 65, y = 370)
+
         
 ############
 #### Définition d'affichage

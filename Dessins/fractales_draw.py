@@ -151,6 +151,113 @@ def draw_sapin():
     mainloop()
 
 
+def __drawcarre__(n):
+    if(n == 0):
+        return None
+    forward(50)
+    left(90)
+    forward(50)
+    left(90)
+    forward(50)
+    left(90)
+    forward(50)
+    left(90)
+    left(n)
+    return __drawcarre__(n-1)
+
+def surpriseduchef():
+    sc = Screen()
+    sc.title('La Surprise du Chef')
+    speed(0)
+    color('green')
+    __drawcarre__(360)
+
+def __tropPetit__(width, height):
+    MIN_SIZE = 6 # Try changing this to decrease/increase the amount of recursion.
+    DRAW_SOLID = True
+    # Determine if the rectangle is too small to draw.
+    return width < MIN_SIZE or height < MIN_SIZE
+
+def __drawInnerRectangle__(x, y, width, height):
+    if __tropPetit__(width, height):
+        # BASE CASE
+        return
+    else:
+        # RECURSIVE CASE
+
+        oneThirdWidth = width / 3
+        oneThirdHeight = height / 3
+        twoThirdsWidth = 2 * (width / 3)
+        twoThirdsHeight = 2 * (height / 3)
+
+        # Move into position.
+        penup()
+        goto(x + oneThirdWidth, y + oneThirdHeight)
+        DRAW_SOLID = True
+
+        # Draw the inner rectangle.
+        if DRAW_SOLID:
+            fillcolor('white')
+            begin_fill()
+        pendown()
+        goto(x + oneThirdWidth, y + twoThirdsHeight)
+        goto(x + twoThirdsWidth, y + twoThirdsHeight)
+        goto(x + twoThirdsWidth, y + oneThirdHeight)
+        goto(x + oneThirdWidth, y + oneThirdHeight)
+        penup()
+        if DRAW_SOLID:
+            end_fill()
+
+        # Draw the inner rectangles across the top.
+        __drawInnerRectangle__(x, y + twoThirdsHeight, oneThirdWidth, oneThirdHeight)
+        __drawInnerRectangle__(x + oneThirdWidth, y + twoThirdsHeight, oneThirdWidth, oneThirdHeight)
+        __drawInnerRectangle__(x + twoThirdsWidth, y + twoThirdsHeight, oneThirdWidth, oneThirdHeight)
+
+        # Draw the inner rectangles across the middle.
 
 
+
+        __drawInnerRectangle__(x, y + oneThirdHeight, oneThirdWidth,
+        oneThirdHeight)
+        __drawInnerRectangle__(x + twoThirdsWidth, y + oneThirdHeight, oneThirdWidth,
+        oneThirdHeight)
+
+        # Draw the inner rectangles across the bottom.
+        __drawInnerRectangle__(x, y, oneThirdWidth, oneThirdHeight)
+        __drawInnerRectangle__(x + oneThirdWidth, y, oneThirdWidth, oneThirdHeight)
+        __drawInnerRectangle__(x + twoThirdsWidth, y, oneThirdWidth,
+        oneThirdHeight)
+
+def __drawCarpet__(x, y, width, height):
+    # The x and y are the lower-left corner of the carpet.
+    DRAW_SOLID = True
+    # Move the pen into position.
+    penup()
+    goto(x, y)
+
+    # Draw the outer rectangle.
+    pendown()
+    if DRAW_SOLID:
+        fillcolor('black')
+        begin_fill()
+    goto(x, y + height)
+    goto(x + width, y + height)
+    goto(x + width, y)
+    goto(x, y)
+    if DRAW_SOLID:
+        end_fill()
+    penup()
+
+    # Draw the inner rectangles.
+    __drawInnerRectangle__(x, y, width, height)
+
+def rect():
+    sc = Screen()
+    sc.title('Rectangle')
+    speed(0)
+    color('magenta')
+    tracer(10, 0)
+    setworldcoordinates(0, 0, 700, 700)
+    hideturtle()
+    __drawCarpet__(50, 50, 600, 600)
 
