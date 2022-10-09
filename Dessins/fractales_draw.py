@@ -1,20 +1,22 @@
 ############
-#### Import de turtle et tout le reste
+#### Import de turtle, du colorchooser de tkinter et tout le reste
 ############
 
 from turtle import *
 import math
 import time
 import random
+from tkinter import colorchooser
 
 ############
 #### Création de la liste globale comportant toutes les fonctions pour dessiner, on l'utilisera plus tard dans le code
+#### Création de la variable contenant la couleur custom choisie par l'utilisateur, on l'utilisera plus tard dans le code
 ############
-
+global list_des_dessins
+custom_color = '#000000'
 ############
 #### Fonctions publique et sous fonctions encapsulées pour le dessin de l'arbre de pythagore
 ############
-global list_des_dessins
 
 
 def draw_pytatree():
@@ -37,7 +39,11 @@ def draw_pytatree():
 def __arbre__(n,longueur):
     angle = 30
     if n==0:
-        color('green')
+        global custom_color
+        if(custom_color != '#000000'):
+            color(custom_color)
+        else:
+            color('green')
         forward(longueur) # avance
         backward(longueur) # recule
         color('#3f1905')
@@ -57,17 +63,22 @@ def __arbre__(n,longueur):
 ############
 
 
-def __courbeVonKoch__(  n=3, cote=200  ):
-	if n == 0 :
-		forward(cote)
-	else :
-		__courbeVonKoch__(n-1, cote/3)
-		left(60)
-		__courbeVonKoch__(n-1, cote/3)
-		left(-120)
-		__courbeVonKoch__(n-1, cote/3)
-		left(60)
-		__courbeVonKoch__(n-1, cote/3)
+def __courbeVonKoch__(  n=3, cote=200):
+    global custom_color
+    if(custom_color != '#000000'):
+        color(custom_color)
+    else:
+        color("blue")
+    if n == 0:
+        forward(cote)
+    else:
+        __courbeVonKoch__(n-1, cote/3)
+        left(60)
+        __courbeVonKoch__(n-1, cote/3)
+        left(-120)
+        __courbeVonKoch__(n-1, cote/3)
+        left(60)
+        __courbeVonKoch__(n-1, cote/3)
 
 
 def draw_flocon(n=3, cote=200):
@@ -77,10 +88,9 @@ def draw_flocon(n=3, cote=200):
     speed(0)	 # on accélère la tortue
     sc = Screen()
     sc.title("Flocon de Von Koch")
-    color('blue')
     for y in range(3):
-	    __courbeVonKoch__(  n, cote  )
-	    left(-120)
+        __courbeVonKoch__(  n, cote  )
+        left(-120)
     done()
     mainloop()
 
@@ -132,7 +142,11 @@ def __arbreenh__(order,center,size):
         __arbreenh__(order - 1, (ep3, ep4), size / 2)
 
 def draw_arbreenh():
-    color('green')
+    global custom_color
+    if(custom_color != '#000000'):
+        color(custom_color)
+    else:
+        color('green')
     sc = Screen()
     sc.title("Arbre en H")
     __arbreenh__(2, (0, 0), 300)
@@ -149,8 +163,14 @@ def __sapintree__(x,y,direction,length, golden_ratio):
     goto(x,y)
     seth(direction)
     pensize(math.log(length,2)/3)
-    if length<10: color('forest green')
-    else: color('gray')
+    if length<10:
+        global custom_color
+        if(custom_color != '#000000'):
+            color(custom_color)
+        else:
+            color('forest green')
+    else: 
+        color('gray')
     down()
     fd(length)
     if length < 3: return
@@ -197,7 +217,11 @@ def draw_surpriseduchef():
     sc = Screen()
     sc.title('La Surprise du Chef')
     speed(0)
-    color('green')
+    global custom_color
+    if(custom_color != '#000000'):
+        color(custom_color)
+    else:
+        color('green')
     __drawcarre__(360)
     done()
     mainloop()
@@ -270,7 +294,11 @@ def __drawfond__(x, y, width, height):
     
     pendown()
     if DRAW_SOLID:
-        fillcolor('black')
+        global custom_color
+        if(custom_color != '#000000'):
+            color(custom_color)
+        else:
+            fillcolor('black')
         begin_fill()
     goto(x, y + height)
     goto(x + width, y + height)
@@ -287,7 +315,6 @@ def draw_rect():
     sc = Screen()
     sc.title('Giga Rectangle')
     speed(0)
-    color('magenta')
     tracer(10, 0)
     setworldcoordinates(0, 0, 700, 700)
     hideturtle()
@@ -339,6 +366,12 @@ def draw_mystere():
     list_des_dessins[random.randint(0,6)]()
     done()
     mainloop()
+
+
+def choose_color():
+    global custom_color
+    custom_color = str(colorchooser.askcolor()[1])
+    
 
 
 

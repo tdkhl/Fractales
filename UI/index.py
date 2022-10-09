@@ -117,6 +117,16 @@ b_mystere.place(x = 610, y = 240)
 
 mystere_label = Label(main, text = "Mystère", font = ("Verdana", 10, "italic bold "), bg = "grey") 
 mystere_label.place(x = 640, y = 370)
+
+
+############
+#### Bouton Couleur
+############
+
+color_img = PhotoImage(file='fract_ressources/color_picker.png')
+b_color = Button(main, image=color_img, command=fractales_draw.choose_color, fg="grey", bg="grey")
+b_color.place(x = 750, y = 10)
+
         
 ############
 #### Définition d'affichage
