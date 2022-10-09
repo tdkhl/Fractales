@@ -4,6 +4,18 @@
 
 from turtle import *
 import math
+import time
+import random
+
+############
+#### Création de la liste globale comportant toutes les fonctions pour dessiner, on l'utilisera plus tard dans le code
+############
+
+############
+#### Fonctions publique et sous fonctions encapsulées pour le dessin de l'arbre de pythagore
+############
+global list_des_dessins
+
 
 def draw_pytatree():
     speed(0)
@@ -40,6 +52,9 @@ def __arbre__(n,longueur):
         backward(longueur/3) # recule
 
 
+############
+#### Fonctions publique et sous fonctions encapsulées pour le dessin du flocon de vonkoch
+############
 
 
 def __courbeVonKoch__(  n=3, cote=200  ):
@@ -68,6 +83,10 @@ def draw_flocon(n=3, cote=200):
 	    left(-120)
     done()
     mainloop()
+
+############
+#### Fonctions publique et sous fonctions encapsulées pour le dessin de l'arbre en H
+############
     
 def __dessinh__(center, size):
     penup()
@@ -120,6 +139,11 @@ def draw_arbreenh():
     done()
     mainloop()
 
+
+############
+#### Fonctions publique et sous fonctions encapsulées pour le dessin du sapin
+############
+
 def __sapintree__(x,y,direction,length, golden_ratio):
     up()
     goto(x,y)
@@ -151,6 +175,10 @@ def draw_sapin():
     mainloop()
 
 
+############
+#### Fonctions publique et sous fonctions encapsulées pour le dessin de la surprise du chef
+############
+
 def __drawcarre__(n):
     if(n == 0):
         return None
@@ -165,37 +193,44 @@ def __drawcarre__(n):
     left(n)
     return __drawcarre__(n-1)
 
-def surpriseduchef():
+def draw_surpriseduchef():
     sc = Screen()
     sc.title('La Surprise du Chef')
     speed(0)
     color('green')
     __drawcarre__(360)
+    done()
+    mainloop()
+
+
+############
+#### Fonctions publique et sous fonctions encapsulées pour le dessin du rectangle
+############
 
 def __tropPetit__(width, height):
-    MIN_SIZE = 6 # Try changing this to decrease/increase the amount of recursion.
+    MIN_SIZE = 6 
     DRAW_SOLID = True
-    # Determine if the rectangle is too small to draw.
+    
     return width < MIN_SIZE or height < MIN_SIZE
 
-def __drawInnerRectangle__(x, y, width, height):
+def __drawlesPtitsRectangles__(x, y, width, height):
     if __tropPetit__(width, height):
-        # BASE CASE
+        # cas de base
         return
     else:
-        # RECURSIVE CASE
+        
 
         oneThirdWidth = width / 3
         oneThirdHeight = height / 3
         twoThirdsWidth = 2 * (width / 3)
         twoThirdsHeight = 2 * (height / 3)
 
-        # Move into position.
+        
         penup()
         goto(x + oneThirdWidth, y + oneThirdHeight)
         DRAW_SOLID = True
 
-        # Draw the inner rectangle.
+        
         if DRAW_SOLID:
             fillcolor('white')
             begin_fill()
@@ -208,34 +243,31 @@ def __drawInnerRectangle__(x, y, width, height):
         if DRAW_SOLID:
             end_fill()
 
-        # Draw the inner rectangles across the top.
-        __drawInnerRectangle__(x, y + twoThirdsHeight, oneThirdWidth, oneThirdHeight)
-        __drawInnerRectangle__(x + oneThirdWidth, y + twoThirdsHeight, oneThirdWidth, oneThirdHeight)
-        __drawInnerRectangle__(x + twoThirdsWidth, y + twoThirdsHeight, oneThirdWidth, oneThirdHeight)
+       
+        __drawlesPtitsRectangles__(x, y + twoThirdsHeight, oneThirdWidth, oneThirdHeight)
+        __drawlesPtitsRectangles__(x + oneThirdWidth, y + twoThirdsHeight, oneThirdWidth, oneThirdHeight)
+        __drawlesPtitsRectangles__(x + twoThirdsWidth, y + twoThirdsHeight, oneThirdWidth, oneThirdHeight)
 
-        # Draw the inner rectangles across the middle.
-
-
-
-        __drawInnerRectangle__(x, y + oneThirdHeight, oneThirdWidth,
+       
+        __drawlesPtitsRectangles__(x, y + oneThirdHeight, oneThirdWidth,
         oneThirdHeight)
-        __drawInnerRectangle__(x + twoThirdsWidth, y + oneThirdHeight, oneThirdWidth,
+        __drawlesPtitsRectangles__(x + twoThirdsWidth, y + oneThirdHeight, oneThirdWidth,
         oneThirdHeight)
 
-        # Draw the inner rectangles across the bottom.
-        __drawInnerRectangle__(x, y, oneThirdWidth, oneThirdHeight)
-        __drawInnerRectangle__(x + oneThirdWidth, y, oneThirdWidth, oneThirdHeight)
-        __drawInnerRectangle__(x + twoThirdsWidth, y, oneThirdWidth,
+        
+        __drawlesPtitsRectangles__(x, y, oneThirdWidth, oneThirdHeight)
+        __drawlesPtitsRectangles__(x + oneThirdWidth, y, oneThirdWidth, oneThirdHeight)
+        __drawlesPtitsRectangles__(x + twoThirdsWidth, y, oneThirdWidth,
         oneThirdHeight)
 
-def __drawCarpet__(x, y, width, height):
-    # The x and y are the lower-left corner of the carpet.
+def __drawfond__(x, y, width, height):
+    
     DRAW_SOLID = True
-    # Move the pen into position.
+    
     penup()
     goto(x, y)
 
-    # Draw the outer rectangle.
+    
     pendown()
     if DRAW_SOLID:
         fillcolor('black')
@@ -248,16 +280,74 @@ def __drawCarpet__(x, y, width, height):
         end_fill()
     penup()
 
-    # Draw the inner rectangles.
-    __drawInnerRectangle__(x, y, width, height)
+    
+    __drawlesPtitsRectangles__(x, y, width, height)
 
-def rect():
+def draw_rect():
     sc = Screen()
-    sc.title('Rectangle')
+    sc.title('Giga Rectangle')
     speed(0)
     color('magenta')
     tracer(10, 0)
     setworldcoordinates(0, 0, 700, 700)
     hideturtle()
-    __drawCarpet__(50, 50, 600, 600)
+    __drawfond__(50, 50, 600, 600)
+
+
+############
+#### Fonctions publique et sous fonctions encapsulées pour le dessin du dragon
+############
+
+ 
+def __dragoncurve__(l,n): 
+  for i in range(1): 
+    def __x__(n): 
+        if n==0: 
+            return 
+        x(n-1) 
+        right(90) 
+        y(n-1) 
+        forward(l) 
+    def __y__(n): 
+
+            if n==0: 
+                return 
+            forward(l) 
+            x(n-1) 
+            left(90) 
+            y(n-1) 
+    fd(l) 
+    x(n) 
+
+
+def draw_dragon():
+    speed(0) 
+    hideturtle() 
+    wn=Screen() 
+    wn.title('Dragon')
+    wn.bgcolor("white") 
+    pencolor("black") 
+    __dragoncurve__(30,40)
+
+############
+#### Assignation de toutes les fonctions de dessin à la liste globale
+#### Fonctions publique et sous fonctions encapsulées pour le dessin aléatoire
+############
+
+list_des_dessins = [draw_pytatree, draw_flocon, draw_arbreenh, draw_sapin, draw_surpriseduchef, draw_rect, draw_dragon]
+def draw_mystere():
+    list_des_dessins[random.randint(0,6)]()
+    done()
+    mainloop()
+
+
+
+
+
+
+    
+
+
+
+
 

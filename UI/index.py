@@ -78,23 +78,45 @@ sapin_label.place(x = 620, y = 200)
 ############
 
 surprise_img = PhotoImage(file='fract_ressources/surprise.png')
-b_surprise = Button(main, image=surprise_img,fg="grey", bg="grey")
+b_surprise = Button(main, image=surprise_img,command=fractales_draw.draw_surpriseduchef,fg="grey", bg="grey")
 b_surprise.place(x = 50, y = 240)
 
 surprise_label = Label(main, text = "Surpise du Chef", font = ("Verdana", 10, "italic bold "), bg = "grey") 
-surprise_label.place(x = 45, y = 370)
+surprise_label.place(x = 50, y = 370)
 
 ############
 #### Bouton Rect
 ############
 
 rect_img = PhotoImage(file='fract_ressources/fract_rect.png')
-b_rect = Button(main, image=rect_img, command=fractales_draw.rect, fg="grey", bg="grey")
-b_rect.place(x = 50, y = 240)
+b_rect = Button(main, image=rect_img, command=fractales_draw.draw_rect, fg="grey", bg="grey")
+b_rect.place(x = 240, y = 240)
 
-rect_label = Label(main, text = "Rect", font = ("Verdana", 10, "italic bold "), bg = "grey") 
-rect_label.place(x = 65, y = 370)
+rect_label = Label(main, text = "Giga Rectangle", font = ("Verdana", 10, "italic bold "), bg = "grey") 
+rect_label.place(x = 245, y = 370)
 
+############
+#### Bouton Dragon
+############
+
+dragon_img = PhotoImage(file='fract_ressources/dragon.png')
+b_dragon = Button(main, image=dragon_img, command=fractales_draw.draw_dragon, fg="grey", bg="grey")
+b_dragon.place(x = 425, y = 240)
+
+dragon_label = Label(main, text = "Dragon", font = ("Verdana", 10, "italic bold "), bg = "grey") 
+dragon_label.place(x = 440, y = 370)
+
+
+############
+#### Bouton Mystere
+############
+
+mystere_img = PhotoImage(file='fract_ressources/mystere.png')
+b_mystere = Button(main, image=mystere_img, command=fractales_draw.draw_mystere, fg="grey", bg="grey")
+b_mystere.place(x = 610, y = 240)
+
+mystere_label = Label(main, text = "Mystère", font = ("Verdana", 10, "italic bold "), bg = "grey") 
+mystere_label.place(x = 640, y = 370)
         
 ############
 #### Définition d'affichage
