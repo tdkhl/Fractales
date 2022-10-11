@@ -7,6 +7,7 @@ import math
 import time
 import random
 from tkinter import colorchooser
+from tkinter import messagebox
 
 ############
 #### Création de la liste globale comportant toutes les fonctions pour dessiner, on l'utilisera plus tard dans le code
@@ -14,17 +15,23 @@ from tkinter import colorchooser
 ############
 global list_des_dessins
 custom_color = '#000000'
+custom_color_bg = '#000000'
 ############
 #### Fonctions publique et sous fonctions encapsulées pour le dessin de l'arbre de pythagore
 ############
 
 
 def draw_pytatree():
+    """fonction publique du module qui sera utilisé dans le module de l'UI"""
     speed(0)
 
     color('#3f1905')
     sc = Screen()
     sc.title("Arbre de Pythagore")
+    if(custom_color_bg != '#000000'):
+        sc.bgcolor(custom_color_bg) 
+    else:
+        sc.bgcolor("white") 
     hideturtle() # cache la tortue
     up() # lève le stylo
     right(90) # tourne de 90 degrés vers la droite 
@@ -37,6 +44,7 @@ def draw_pytatree():
     
 
 def __arbre__(n,longueur):
+    """fonction encapsulé necessaire a la creation de l'arbre de pythagore"""
     angle = 30
     if n==0:
         global custom_color
@@ -64,6 +72,7 @@ def __arbre__(n,longueur):
 
 
 def __courbeVonKoch__(  n=3, cote=200):
+    """fonction encapsulé necessaire a la creation du flocon"""
     global custom_color
     if(custom_color != '#000000'):
         color(custom_color)
@@ -82,12 +91,17 @@ def __courbeVonKoch__(  n=3, cote=200):
 
 
 def draw_flocon(n=3, cote=200):
+    """fonction publique du module qui sera utilisé dans le module de l'UI"""
     
     setheading(0) # orientation intiale de la tête : vers la droite de l'écran
     hideturtle() # on cache la tortue
     speed(0)	 # on accélère la tortue
     sc = Screen()
     sc.title("Flocon de Von Koch")
+    if(custom_color_bg != '#000000'):
+        sc.bgcolor(custom_color_bg) 
+    else:
+        sc.bgcolor("white") 
     for y in range(3):
         __courbeVonKoch__(  n, cote  )
         left(-120)
@@ -99,11 +113,12 @@ def draw_flocon(n=3, cote=200):
 ############
     
 def __dessinh__(center, size):
+    """fonction encapsulé necessaire a la creation du arbre en h"""
     penup()
     goto(center)
     pendown()
 
-    forward(size / 2)  # right side of H
+    forward(size / 2)
     left(90)
     forward(size / 2)
     right(180)
@@ -113,16 +128,17 @@ def __dessinh__(center, size):
     goto(center)
     pendown()
 
-    right(90)  # left side of H
+    right(90)
     forward(size / 2)
     right(90)
     forward(size / 2)
     right(180)
     forward(size)
 
-    right(90)  # return turtle to original orientation
+    right(90)
 
 def __get_h_coord__(center, size):
+    """fonction encapsulé necessaire a la creation du arbre en h"""
     ep1 = center[0] + size / 2
     ep2 = center[1] + size / 2
     ep3 = center[0] - size / 2
@@ -131,6 +147,7 @@ def __get_h_coord__(center, size):
     return ep1, ep2, ep3, ep4
 
 def __arbreenh__(order,center,size):
+    """fonction encapsulé necessaire a la creation du arbre en h """
     __dessinh__(center, size)
 
     if order > 0:
@@ -142,6 +159,7 @@ def __arbreenh__(order,center,size):
         __arbreenh__(order - 1, (ep3, ep4), size / 2)
 
 def draw_arbreenh():
+    """fonction publique du module qui sera utilisé dans le module de l'UI"""
     global custom_color
     if(custom_color != '#000000'):
         color(custom_color)
@@ -149,6 +167,10 @@ def draw_arbreenh():
         color('green')
     sc = Screen()
     sc.title("Arbre en H")
+    if(custom_color_bg != '#000000'):
+        sc.bgcolor(custom_color_bg) 
+    else:
+        sc.bgcolor("white") 
     __arbreenh__(2, (0, 0), 300)
     done()
     mainloop()
@@ -159,6 +181,7 @@ def draw_arbreenh():
 ############
 
 def __sapintree__(x,y,direction,length, golden_ratio):
+    """fonction encapsulé necessaire a la creation du sapin"""
     up()
     goto(x,y)
     seth(direction)
@@ -182,10 +205,13 @@ def __sapintree__(x,y,direction,length, golden_ratio):
 
 
 def draw_sapin():
+    """fonction publique du module qui sera utilisé dans le module de l'UI"""
     sc = Screen()
     sc.title('Sapin')
-    #sc.setup(1000,1000)
-    #sc.setworldcoordinates(-1000,-1000,1000,1000)
+    if(custom_color_bg != '#000000'):
+        sc.bgcolor(custom_color_bg) 
+    else:
+        sc.bgcolor("white") 
     speed(0)
     hideturtle()
     tracer(0,0)
@@ -200,6 +226,7 @@ def draw_sapin():
 ############
 
 def __drawcarre__(n):
+    """fonction encapsulé necessaire a la creation de la surprise du chef"""
     if(n == 0):
         return None
     forward(50)
@@ -214,8 +241,13 @@ def __drawcarre__(n):
     return __drawcarre__(n-1)
 
 def draw_surpriseduchef():
+    """fonction publique du module qui sera utilisé dans le module de l'UI"""
     sc = Screen()
     sc.title('La Surprise du Chef')
+    if(custom_color_bg != '#000000'):
+        sc.bgcolor(custom_color_bg) 
+    else:
+        sc.bgcolor("white") 
     speed(0)
     global custom_color
     if(custom_color != '#000000'):
@@ -232,12 +264,14 @@ def draw_surpriseduchef():
 ############
 
 def __tropPetit__(width, height):
+    """fonction encapsulé necessaire a la creation du giga rectangle"""
     MIN_SIZE = 6 
     DRAW_SOLID = True
     
     return width < MIN_SIZE or height < MIN_SIZE
 
 def __drawlesPtitsRectangles__(x, y, width, height):
+    """fonction encapsulé necessaire a la creation du giga rectangle"""
     if __tropPetit__(width, height):
         # cas de base
         return
@@ -285,7 +319,7 @@ def __drawlesPtitsRectangles__(x, y, width, height):
         oneThirdHeight)
 
 def __drawfond__(x, y, width, height):
-    
+    """fonction encapsulé necessaire a la creation du giga rectangle"""
     DRAW_SOLID = True
     
     penup()
@@ -312,8 +346,14 @@ def __drawfond__(x, y, width, height):
     __drawlesPtitsRectangles__(x, y, width, height)
 
 def draw_rect():
+    """fonction publique du module qui sera utilisé dans le module de l'UI"""
     sc = Screen()
     sc.title('Giga Rectangle')
+    if(custom_color_bg != '#000000'):
+        sc.bgcolor(custom_color_bg) 
+    else:
+        sc.bgcolor("white") 
+        
     speed(0)
     tracer(10, 0)
     setworldcoordinates(0, 0, 700, 700)
@@ -325,36 +365,42 @@ def draw_rect():
 #### Fonctions publique et sous fonctions encapsulées pour le dessin du dragon
 ############
 
- 
-def __dragoncurve__(l,n): 
-  for i in range(1): 
-    def __x__(n): 
-        if n==0: 
-            return 
-        x(n-1) 
-        right(90) 
-        y(n-1) 
-        forward(l) 
-    def __y__(n): 
 
-            if n==0: 
-                return 
-            forward(l) 
-            x(n-1) 
-            left(90) 
-            y(n-1) 
-    fd(l) 
-    x(n) 
+def __dragon_build__(turtle_string, n):
+    """fonction encapsulé necessaire a la creation du dragon"""
+    rules = {'x':'x+yf', 'y':'fx-y','f':'f', '-':'-', '+':'+'}
+    turtle_string = ''.join([rules[x] for x in turtle_string])
+    if n > 1: return __dragon_build__(turtle_string, n-1)
+    else: return turtle_string
+
+def __dragon__(size=20):
+    """fonction encapsulé necessaire a la creation du dragon"""
+    turtle_string = __dragon_build__('fx', size)
+    for x in turtle_string:
+        if x == 'f': forward(5)
+        elif x == '+': right(90)
+        elif x == '-': left(90)
+
 
 
 def draw_dragon():
+    """fonction publique du module qui sera utilisé dans le module de l'UI"""
     speed(0) 
     hideturtle() 
     wn=Screen() 
     wn.title('Dragon')
-    wn.bgcolor("white") 
-    pencolor("black") 
-    __dragoncurve__(30,40)
+    if(custom_color_bg != '#000000'):
+        wn.bgcolor(custom_color_bg) 
+    else:
+        wn.bgcolor("white") 
+
+    if(custom_color != '#000000'):
+        color(custom_color)
+    else:   
+        pencolor("blue") 
+    __dragon__()
+    done()
+    mainloop()
 
 ############
 #### Assignation de toutes les fonctions de dessin à la liste globale
@@ -369,8 +415,17 @@ def draw_mystere():
 
 
 def choose_color():
+    """fonction publique du module qui sera utilisé dans le module de l'UI pour choisir la couleur de toutes les fractales"""
+    messagebox.showwarning("Choix des couleurs", "Vous vous apprêtez à changer la couleur des fractales")
     global custom_color
     custom_color = str(colorchooser.askcolor()[1])
+
+def choose_color_bg():
+    """fonction publique du module qui sera utilisé dans le module de l'UI pour choisir la couleur de l'arrière plan de toutes les fractales"""
+    messagebox.showwarning("Choix des couleurs", "Vous vous apprêtez à changer la couleur de l'arrière plan des fractales")
+    global custom_color_bg
+    custom_color_bg = str(colorchooser.askcolor()[1])
+    
     
 
 

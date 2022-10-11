@@ -30,12 +30,16 @@ label.pack(pady=10) # Position du label
 #### Bouton Arbre Pythagore
 ############
 
-pytatree_img = PhotoImage(file='fract_ressources/pyta_treepng.png')
-b_pytatree = Button(main, image=pytatree_img,command=fractales_draw.draw_pytatree, fg="grey", bg="grey")
+pytatree_img = PhotoImage(file='fract_ressources/pyta_treepng.png') # Charge l'image
+# Crée un bouton avec l'image que l'on a parametré auparavant et on le lie à la fonction du module draw pour dessiner la fractales
+b_pytatree = Button(main, image=pytatree_img,command=fractales_draw.draw_pytatree, fg="grey", bg="grey") 
+#place le bouton à tel coordonnées
 b_pytatree.place(x = 50, y = 60)
 
+# Créer un label (texte) avec le nom de la figure, la police et la mise en forme
 pytatree_label = Label(main, text = "Arbre de pythagore", font = ("Verdana", 10, "italic bold "), bg = "grey") 
 pytatree_label.place(x = 45, y = 200)
+# Place le label
 
 ############
 #### Bouton Flocon
@@ -104,7 +108,7 @@ b_dragon = Button(main, image=dragon_img, command=fractales_draw.draw_dragon, fg
 b_dragon.place(x = 425, y = 240)
 
 dragon_label = Label(main, text = "Dragon", font = ("Verdana", 10, "italic bold "), bg = "grey") 
-dragon_label.place(x = 440, y = 370)
+dragon_label.place(x = 460, y = 370)
 
 
 ############
@@ -120,12 +124,22 @@ mystere_label.place(x = 640, y = 370)
 
 
 ############
-#### Bouton Couleur
+#### Bouton Couleur pour fractale
 ############
 
 color_img = PhotoImage(file='fract_ressources/color_picker.png')
 b_color = Button(main, image=color_img, command=fractales_draw.choose_color, fg="grey", bg="grey")
 b_color.place(x = 750, y = 10)
+
+
+############
+#### Bouton Couleur pour interface
+############
+
+color2_img = PhotoImage(file='fract_ressources/color_picker.png')
+b_color2 = Button(main, image=color2_img, command=fractales_draw.choose_color_bg, fg="grey", bg="grey")
+b_color2.place(x = 20, y = 10)
+
 
         
 ############
@@ -137,5 +151,3 @@ def displayWindow():
     if(main is None):
         raise ValueError("Une erreur a eu lieu lors de la définition 'main' de l'interface graphique")
     main.mainloop()
-    
-    
