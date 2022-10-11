@@ -8,6 +8,7 @@ import time
 import random
 from tkinter import colorchooser
 from tkinter import messagebox
+from math import cos, pi
 
 ############
 #### Création de la liste globale comportant toutes les fonctions pour dessiner, on l'utilisera plus tard dans le code
@@ -70,6 +71,7 @@ def __arbre__(n,longueur):
 #### Fonctions publique et sous fonctions encapsulées pour le dessin du flocon de vonkoch
 ############
 
+# Flocon classique
 
 def __courbeVonKoch__(  n=3, cote=200):
     """fonction encapsulé necessaire a la creation du flocon"""
@@ -90,7 +92,7 @@ def __courbeVonKoch__(  n=3, cote=200):
         __courbeVonKoch__(n-1, cote/3)
 
 
-def draw_flocon(n=3, cote=200):
+def draw_flocon(n=5, cote=500):
     """fonction publique du module qui sera utilisé dans le module de l'UI"""
     
     setheading(0) # orientation intiale de la tête : vers la droite de l'écran
@@ -107,6 +109,46 @@ def draw_flocon(n=3, cote=200):
         left(-120)
     done()
     mainloop()
+
+
+# Flocon difforme
+
+def __courbeVonKochDiff__(  n, cote  ) :
+    global custom_color
+    if(custom_color != '#000000'):
+        color(custom_color)
+    else:
+        color("blue")
+    if n == 0:
+        forward(cote)
+    else:
+        __courbeVonKochDiff__(n-1, cote/3)
+        left(90)
+        __courbeVonKochDiff__(n-1, cote/3)
+        right(90)
+        __courbeVonKochDiff__(n-1, cote/3)
+        right(90)
+        __courbeVonKochDiff__(n-1, cote/3)
+        left(90)
+        __courbeVonKochDiff__(n-1, cote/3)
+
+
+def draw_flocon_diff(n=3, cote=200) :
+    setheading(0) # orientation intiale de la tête : vers la droite de l'écran
+    hideturtle() # on cache la tortue
+    speed(0)	 # on accélère la tortue
+    sc = Screen()
+    sc.title("Flocon de Von Koch Difforme")
+    if(custom_color_bg != '#000000'):
+        sc.bgcolor(custom_color_bg) 
+    else:
+        sc.bgcolor("white") 
+    for _ in range(3) :
+        __courbeVonKochDiff__(  n, cote  )
+        left(-120)
+    done()
+    mainloop()
+
 
 ############
 #### Fonctions publique et sous fonctions encapsulées pour le dessin de l'arbre en H

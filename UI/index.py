@@ -5,13 +5,30 @@ import sys
  # Import du module système et indication de la location du module UI et des ressources
 sys.path.insert(2, "fract_ressources")
 sys.path.insert(3, "Dessins")
+sys.path.insert(4, "UI")
 import fractales_draw
+import ui_events
 from tkinter import *
+from tkinter import ttk
+
+############
+#### Fonctions pour afficher / cacher la fenêtre de choix, utilisées plus tard
+############
 
 
+def fermeturefenetreChoix():
+    """Cache la fenêtre de choix des fractales. Ne néscessite et ne renvoi rien"""
+    fenetreChoix.withdraw()
+
+def ouverturefenetreChoix():
+    """Affiche la fenêtre de choix des fractales. Ne néscessite et ne renvoi rien"""
+    fenetreChoix.deiconify()
+
+    
 ############
 #### Fenetre Principale
 ############
+
 
 
        
@@ -25,6 +42,17 @@ main.resizable(height = False, width = False) # Est-ce que la taille de la fenê
 
 label = Label(main, text = "Voici les différentes fractales récursives disponibles", font = ("Verdana", 15, "italic bold underline"), bg = "grey") # Création d'un label
 label.pack(pady=10) # Position du label
+
+############
+#### Fenetre Secondaire de choix des fractales variables
+############
+
+global fenetreChoix
+fenetreChoix = Toplevel()
+fenetreChoix.title("Variantes de fractales")
+fenetreChoix.geometry("300x400")
+fenetreChoix.withdraw()
+fenetreChoix.protocol("WM_DELETE_WINDOW", fermeturefenetreChoix)
 
 ############
 #### Bouton Arbre Pythagore
@@ -46,11 +74,13 @@ pytatree_label.place(x = 45, y = 200)
 ############
 
 flocon_img = PhotoImage(file='fract_ressources/flocon.png')
-b_flocon = Button(main, image=flocon_img,command=fractales_draw.draw_flocon, fg="grey", bg="grey")
+b_flocon = Button(main, image=flocon_img,command=ui_events.showFloconMenu, fg="grey", bg="grey")
 b_flocon.place(x = 240, y = 60)
 
 flocon_label = Label(main, text = "Flocon", font = ("Verdana", 10, "italic bold "), bg = "grey") 
 flocon_label.place(x = 280, y = 200)
+
+
 
 
 ############
@@ -142,12 +172,18 @@ b_color2.place(x = 20, y = 10)
 
 
         
+
 ############
 #### Définition d'affichage
 ############
+
+
+
 
 def displayWindow():
     """Affiche l'UI. Ne néscessite et ne renvoi rien"""
     if(main is None):
         raise ValueError("Une erreur a eu lieu lors de la définition 'main' de l'interface graphique")
     main.mainloop()
+    fermeturefenetreChoix()
+    
