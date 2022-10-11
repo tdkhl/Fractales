@@ -10,3 +10,4 @@ if(index is None):
 # utilise la fonction du module index afin d'afficher la fenêtre principale
 index.displayWindow()
 
+input('Press ENTER to exit') 

@@ -8,3 +8,4 @@ if(index is None):
 
 index.displayWindow()
 
+input('Press ENTER to exit') 
