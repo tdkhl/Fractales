@@ -60,7 +60,7 @@ fenetreChoix.protocol("WM_DELETE_WINDOW", fermeturefenetreChoix)
 
 pytatree_img = PhotoImage(file='fract_ressources/pyta_treepng.png') # Charge l'image
 # Crée un bouton avec l'image que l'on a parametré auparavant et on le lie à la fonction du module draw pour dessiner la fractales
-b_pytatree = Button(main, image=pytatree_img,command=fractales_draw.draw_pytatree, fg="grey", bg="grey") 
+b_pytatree = Button(main, image=pytatree_img,command=ui_events.showArbreMenu, fg="grey", bg="grey") 
 #place le bouton à tel coordonnées
 b_pytatree.place(x = 50, y = 60)
 

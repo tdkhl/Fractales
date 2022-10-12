@@ -17,6 +17,7 @@ from math import cos, pi
 global list_des_dessins
 custom_color = '#000000'
 custom_color_bg = '#000000'
+angle_arbre = 30
 ############
 #### Fonctions publique et sous fonctions encapsulées pour le dessin de l'arbre de pythagore
 ############
@@ -46,7 +47,9 @@ def draw_pytatree():
 
 def __arbre__(n,longueur):
     """fonction encapsulé necessaire a la creation de l'arbre de pythagore"""
-    angle = 30
+    global angle_arbre
+
+    
     if n==0:
         global custom_color
         if(custom_color != '#000000'):
@@ -59,11 +62,11 @@ def __arbre__(n,longueur):
     else:
         width(n)
         forward(longueur/3) #avance
-        left(angle) # tourne vers la gauche de angle degrés
+        left(angle_arbre) # tourne vers la gauche de angle degrés
         __arbre__(n-1,longueur*2/3)
-        right(2*angle) # tourne vers la droite de angle degrés
+        right(2*angle_arbre) # tourne vers la droite de angle degrés
         __arbre__(n-1,longueur*2/3)
-        left(angle) # tourne vers la gauche de angle degrés
+        left(angle_arbre) # tourne vers la gauche de angle degrés
         backward(longueur/3) # recule
 
 
