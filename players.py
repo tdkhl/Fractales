@@ -11,6 +11,10 @@ class Player1(pygame.sprite.Sprite):
         self.attack = 50
         self.velocity = 15
 
+        self.isJump = False
+        self.jumpEnd = time.time()
+
+
         self.image = pygame.image.load('assets/warrior/warrior.png')
         self.rect = self.image.get_rect()
         self.rect.y = 595
@@ -31,8 +35,10 @@ class Player1(pygame.sprite.Sprite):
         self.rect.x -= self.velocity
 
     def move_up(self):
+        self.isJump = True
+        self.jumpEnd = time.time() + 1
 
-        self.rect.y -= self.velocity * 10
+
 
     def launch_projectile(self, dir):
         self.all_projectiles.add(self.attack1(self, dir))

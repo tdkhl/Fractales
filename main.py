@@ -48,8 +48,16 @@ while(isRunning):
     #actualisation du display
     pygame.display.flip()
 
-    if game.player1.rect.y != 595:
+    if game.player1.rect.y != 595 and game.player1.jumpEnd < time.time():
+
+        game.player1.isJump = False
+    if game.player1.rect.y != 595 and game.player1.isJump == False:
+
         game.player1.rect.y += 1
+
+    if game.player1.isJump == True and game.player1.jumpEnd > time.time():
+        game.player1.rect.y -= 0.5
+
 
 
 
